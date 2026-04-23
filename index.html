@@ -4,627 +4,845 @@
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>Mubashir Hassan — Data Analyst</title>
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;700;800&family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@300;400;500&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Exo+2:wght@300;400;500;600&family=Share+Tech+Mono&display=swap" rel="stylesheet"/>
 <style>
-  :root {
-    --bg: #0a0f0d;
-    --bg2: #111813;
-    --bg3: #162019;
-    --accent: #00e87a;
-    --accent2: #00c465;
-    --dim: #3a4d41;
-    --muted: #6b8575;
-    --text: #e8f2ec;
-    --text2: #a8c4b4;
-    --border: #1e2e25;
-  }
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-  html { scroll-behavior: smooth; }
-  body {
-    background: var(--bg);
-    color: var(--text);
-    font-family: 'Inter', sans-serif;
-    font-size: 16px;
-    line-height: 1.7;
-    overflow-x: hidden;
-  }
+:root {
+  --navy: #080f1c;
+  --navy2: #0d1829;
+  --navy3: #112035;
+  --panel: #0f1e30;
+  --blue: #1a6cff;
+  --blue2: #1458cc;
+  --cyan: #00c2e0;
+  --steel: #1e3a5f;
+  --mid: #2e5280;
+  --line: #1a2e48;
+  --muted: #4a7090;
+  --text2: #8aaec8;
+  --text: #cce0f0;
+  --white: #eaf4ff;
+  --grey: #1c2e3f;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  background:var(--navy);
+  color:var(--text);
+  font-family:'Exo 2',sans-serif;
+  font-size:16px;
+  line-height:1.7;
+  overflow-x:hidden;
+}
 
-  /* noise texture overlay */
-  body::before {
-    content: '';
-    position: fixed;
-    inset: 0;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
-    pointer-events: none;
-    z-index: 0;
-    opacity: 0.4;
-  }
+/* grid overlay */
+body::after{
+  content:'';
+  position:fixed;inset:0;
+  background-image:
+    linear-gradient(rgba(26,108,255,0.03) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(26,108,255,0.03) 1px,transparent 1px);
+  background-size:60px 60px;
+  pointer-events:none;z-index:0;
+}
 
-  /* NAV */
-  nav {
-    position: fixed; top: 0; left: 0; right: 0;
-    z-index: 100;
-    display: flex; justify-content: space-between; align-items: center;
-    padding: 20px 60px;
-    background: rgba(10,15,13,0.85);
-    backdrop-filter: blur(12px);
-    border-bottom: 1px solid var(--border);
-  }
-  .nav-logo {
-    font-family: 'Syne', sans-serif;
-    font-weight: 800;
-    font-size: 18px;
-    color: var(--accent);
-    letter-spacing: -0.5px;
-  }
-  .nav-links { display: flex; gap: 32px; }
-  .nav-links a {
-    font-size: 13px;
-    font-family: 'IBM Plex Mono', monospace;
-    color: var(--muted);
-    text-decoration: none;
-    transition: color 0.2s;
-  }
-  .nav-links a:hover { color: var(--accent); }
+/* NAV */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  display:flex;justify-content:space-between;align-items:center;
+  padding:0 64px;height:64px;
+  background:rgba(8,15,28,0.92);
+  backdrop-filter:blur(16px);
+  border-bottom:1px solid var(--line);
+}
+.nav-logo{
+  font-family:'Rajdhani',sans-serif;
+  font-weight:700;font-size:20px;
+  color:var(--white);letter-spacing:2px;
+  text-transform:uppercase;
+}
+.nav-logo span{color:var(--blue);}
+.nav-links{display:flex;gap:36px;}
+.nav-links a{
+  font-family:'Share Tech Mono',monospace;
+  font-size:12px;color:var(--muted);
+  text-decoration:none;letter-spacing:1.5px;
+  text-transform:uppercase;
+  transition:color .2s;
+}
+.nav-links a:hover{color:var(--cyan);}
 
-  /* SECTIONS */
-  section { position: relative; z-index: 1; padding: 100px 60px; max-width: 1100px; margin: 0 auto; }
+/* HERO */
+#hero{
+  min-height:100vh;
+  display:flex;align-items:center;
+  padding:80px 64px 60px;
+  position:relative;z-index:1;
+  max-width:1200px;margin:0 auto;
+}
+.hero-grid{
+  display:grid;
+  grid-template-columns:1fr 380px;
+  gap:80px;align-items:center;
+  width:100%;
+}
+.hero-eyebrow{
+  font-family:'Share Tech Mono',monospace;
+  font-size:12px;color:var(--cyan);
+  letter-spacing:3px;text-transform:uppercase;
+  margin-bottom:20px;
+  opacity:0;animation:fadeUp .6s .1s forwards;
+}
+.hero-name{
+  font-family:'Rajdhani',sans-serif;
+  font-weight:700;
+  font-size:clamp(54px,7vw,88px);
+  line-height:.95;
+  letter-spacing:-1px;
+  color:var(--white);
+  opacity:0;animation:fadeUp .6s .2s forwards;
+}
+.hero-name .line2{
+  color:transparent;
+  -webkit-text-stroke:1.5px var(--blue);
+}
+.hero-role{
+  font-family:'Rajdhani',sans-serif;
+  font-size:18px;font-weight:500;
+  color:var(--blue);letter-spacing:3px;
+  text-transform:uppercase;
+  margin:20px 0 16px;
+  opacity:0;animation:fadeUp .6s .3s forwards;
+}
+.hero-desc{
+  font-size:15px;color:var(--text2);
+  max-width:520px;line-height:1.8;font-weight:300;
+  opacity:0;animation:fadeUp .6s .4s forwards;
+}
+.hero-btns{
+  display:flex;gap:16px;margin-top:40px;flex-wrap:wrap;
+  opacity:0;animation:fadeUp .6s .5s forwards;
+}
+.btn-p{
+  background:var(--blue);color:var(--white);
+  padding:13px 32px;border-radius:3px;
+  font-family:'Rajdhani',sans-serif;font-weight:600;
+  font-size:14px;letter-spacing:1.5px;text-transform:uppercase;
+  text-decoration:none;transition:background .2s,transform .15s;
+  border:1px solid var(--blue);
+}
+.btn-p:hover{background:var(--blue2);transform:translateY(-2px);}
+.btn-o{
+  border:1px solid var(--steel);color:var(--text2);
+  padding:13px 32px;border-radius:3px;
+  font-family:'Rajdhani',sans-serif;font-weight:600;
+  font-size:14px;letter-spacing:1.5px;text-transform:uppercase;
+  text-decoration:none;transition:border-color .2s,color .2s,transform .15s;
+}
+.btn-o:hover{border-color:var(--cyan);color:var(--cyan);transform:translateY(-2px);}
 
-  /* HERO */
-  #hero {
-    min-height: 100vh;
-    display: flex; flex-direction: column; justify-content: center;
-    padding-top: 140px;
-    max-width: 100%;
-    padding-left: 60px; padding-right: 60px;
-  }
-  .hero-inner { max-width: 1100px; margin: 0 auto; width: 100%; }
-  .hero-tag {
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 13px;
-    color: var(--accent);
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    margin-bottom: 24px;
-    opacity: 0;
-    animation: fadeUp 0.7s 0.1s forwards;
-  }
-  .hero-name {
-    font-family: 'Syne', sans-serif;
-    font-weight: 800;
-    font-size: clamp(52px, 8vw, 100px);
-    line-height: 0.95;
-    letter-spacing: -3px;
-    color: var(--text);
-    opacity: 0;
-    animation: fadeUp 0.7s 0.25s forwards;
-  }
-  .hero-name span { color: var(--accent); }
-  .hero-sub {
-    font-size: 18px;
-    color: var(--text2);
-    margin-top: 28px;
-    max-width: 600px;
-    font-weight: 300;
-    opacity: 0;
-    animation: fadeUp 0.7s 0.4s forwards;
-  }
-  .hero-cta {
-    display: flex; gap: 16px; margin-top: 48px; flex-wrap: wrap;
-    opacity: 0;
-    animation: fadeUp 0.7s 0.55s forwards;
-  }
-  .btn-primary {
-    background: var(--accent);
-    color: #0a0f0d;
-    padding: 14px 32px;
-    border-radius: 4px;
-    font-family: 'Syne', sans-serif;
-    font-weight: 700;
-    font-size: 14px;
-    text-decoration: none;
-    letter-spacing: 0.5px;
-    transition: background 0.2s, transform 0.15s;
-    display: inline-block;
-  }
-  .btn-primary:hover { background: #00ff88; transform: translateY(-2px); }
-  .btn-outline {
-    border: 1px solid var(--dim);
-    color: var(--text2);
-    padding: 14px 32px;
-    border-radius: 4px;
-    font-family: 'Syne', sans-serif;
-    font-weight: 500;
-    font-size: 14px;
-    text-decoration: none;
-    letter-spacing: 0.5px;
-    transition: border-color 0.2s, color 0.2s, transform 0.15s;
-    display: inline-block;
-  }
-  .btn-outline:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-2px); }
+/* Hero card */
+.hero-card{
+  background:var(--panel);
+  border:1px solid var(--line);
+  border-radius:4px;
+  padding:32px;
+  opacity:0;animation:fadeUp .6s .4s forwards;
+}
+.hc-label{
+  font-family:'Share Tech Mono',monospace;
+  font-size:10px;color:var(--muted);
+  letter-spacing:2px;text-transform:uppercase;
+  margin-bottom:20px;
+  padding-bottom:12px;
+  border-bottom:1px solid var(--line);
+}
+.hc-row{
+  display:flex;justify-content:space-between;
+  align-items:center;padding:10px 0;
+  border-bottom:1px solid var(--line);
+}
+.hc-row:last-child{border-bottom:none;}
+.hc-key{
+  font-family:'Share Tech Mono',monospace;
+  font-size:11px;color:var(--muted);
+}
+.hc-val{
+  font-size:13px;color:var(--text);
+  font-weight:500;text-align:right;
+}
+.hc-val.accent{color:var(--cyan);}
+.status-dot{
+  display:inline-block;
+  width:7px;height:7px;border-radius:50%;
+  background:var(--cyan);margin-right:6px;
+  animation:pulse 2s infinite;
+}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
 
-  .hero-stats {
-    display: flex; gap: 48px; margin-top: 80px;
-    border-top: 1px solid var(--border);
-    padding-top: 40px;
-    opacity: 0;
-    animation: fadeUp 0.7s 0.7s forwards;
-    flex-wrap: wrap;
-  }
-  .stat-num {
-    font-family: 'Syne', sans-serif;
-    font-size: 36px;
-    font-weight: 800;
-    color: var(--accent);
-    line-height: 1;
-  }
-  .stat-label { font-size: 13px; color: var(--muted); margin-top: 4px; }
+/* STATS BAR */
+.stats-bar{
+  background:var(--panel);
+  border-top:1px solid var(--line);
+  border-bottom:1px solid var(--line);
+  position:relative;z-index:1;
+}
+.stats-inner{
+  max-width:1200px;margin:0 auto;
+  display:grid;grid-template-columns:repeat(4,1fr);
+  padding:0 64px;
+}
+.stat-item{
+  padding:28px 24px;
+  border-right:1px solid var(--line);
+  text-align:center;
+}
+.stat-item:last-child{border-right:none;}
+.stat-n{
+  font-family:'Rajdhani',sans-serif;
+  font-size:40px;font-weight:700;
+  color:var(--blue);line-height:1;
+}
+.stat-u{color:var(--cyan);font-size:24px;}
+.stat-l{
+  font-family:'Share Tech Mono',monospace;
+  font-size:11px;color:var(--muted);
+  letter-spacing:1px;margin-top:6px;text-transform:uppercase;
+}
 
-  /* SECTION HEADINGS */
-  .section-label {
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 12px;
-    color: var(--accent);
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    margin-bottom: 12px;
-  }
-  .section-title {
-    font-family: 'Syne', sans-serif;
-    font-size: 42px;
-    font-weight: 800;
-    letter-spacing: -1.5px;
-    line-height: 1.1;
-    margin-bottom: 48px;
-  }
+/* SECTIONS */
+.wrap{max-width:1200px;margin:0 auto;padding:0 64px;}
+.section{padding:80px 0;position:relative;z-index:1;}
+.sec-head{margin-bottom:48px;}
+.sec-num{
+  font-family:'Share Tech Mono',monospace;
+  font-size:11px;color:var(--blue);
+  letter-spacing:3px;text-transform:uppercase;
+  margin-bottom:10px;
+}
+.sec-title{
+  font-family:'Rajdhani',sans-serif;
+  font-size:38px;font-weight:700;
+  color:var(--white);letter-spacing:-0.5px;
+  line-height:1.1;
+}
+.sec-title span{
+  color:transparent;
+  -webkit-text-stroke:1px var(--blue);
+}
+.sec-line{
+  width:48px;height:2px;
+  background:var(--blue);
+  margin-top:16px;
+}
 
-  /* SKILLS */
-  #skills { background: var(--bg2); max-width: 100%; padding: 100px 60px; }
-  #skills .inner { max-width: 1100px; margin: 0 auto; }
-  .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; }
-  .skill-card {
-    background: var(--bg3);
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    padding: 24px;
-    transition: border-color 0.2s, transform 0.2s;
-    cursor: default;
-  }
-  .skill-card:hover { border-color: var(--accent); transform: translateY(-4px); }
-  .skill-icon { font-size: 28px; margin-bottom: 12px; }
-  .skill-name {
-    font-family: 'Syne', sans-serif;
-    font-size: 15px;
-    font-weight: 700;
-    color: var(--text);
-    margin-bottom: 4px;
-  }
-  .skill-level {
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 11px;
-    color: var(--accent);
-  }
-  .skill-bar-wrap { background: var(--border); border-radius: 2px; height: 3px; margin-top: 12px; }
-  .skill-bar { background: var(--accent); height: 3px; border-radius: 2px; transition: width 1s ease; }
+/* SKILLS */
+#skills{background:var(--navy2);}
+.skills-table{width:100%;border-collapse:collapse;}
+.skills-table thead tr{
+  border-bottom:1px solid var(--line);
+}
+.skills-table th{
+  font-family:'Share Tech Mono',monospace;
+  font-size:10px;color:var(--muted);
+  letter-spacing:2px;text-transform:uppercase;
+  padding:0 0 14px;text-align:left;
+  font-weight:400;
+}
+.skills-table th:last-child{text-align:right;}
+.skills-table td{
+  padding:14px 0;
+  border-bottom:1px solid rgba(26,46,72,0.5);
+  vertical-align:middle;
+}
+.skills-table tr:last-child td{border-bottom:none;}
+.skill-name-cell{
+  font-family:'Rajdhani',sans-serif;
+  font-size:17px;font-weight:600;
+  color:var(--white);width:200px;
+}
+.skill-cat{
+  font-family:'Share Tech Mono',monospace;
+  font-size:10px;color:var(--muted);
+  letter-spacing:1px;text-transform:uppercase;
+  width:160px;
+}
+.skill-bar-cell{flex:1;}
+.bar-track{
+  background:var(--line);
+  height:4px;border-radius:1px;
+  width:100%;
+}
+.bar-fill{
+  height:4px;border-radius:1px;
+  background:linear-gradient(90deg,var(--blue2),var(--cyan));
+  transition:width 1.2s ease;
+}
+.skill-pct{
+  font-family:'Share Tech Mono',monospace;
+  font-size:12px;color:var(--cyan);
+  text-align:right;width:50px;
+}
 
-  /* EXPERIENCE */
-  .exp-list { display: flex; flex-direction: column; gap: 2px; }
-  .exp-item {
-    background: var(--bg2);
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    padding: 32px;
-    transition: border-color 0.2s;
-    position: relative;
-    overflow: hidden;
-  }
-  .exp-item::before {
-    content: '';
-    position: absolute;
-    left: 0; top: 0; bottom: 0;
-    width: 3px;
-    background: var(--border);
-    transition: background 0.2s;
-  }
-  .exp-item:hover::before { background: var(--accent); }
-  .exp-item:hover { border-color: var(--dim); }
-  .exp-header { display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 12px; }
-  .exp-role { font-family: 'Syne', sans-serif; font-size: 20px; font-weight: 700; }
-  .exp-company { font-size: 14px; color: var(--accent); margin-top: 2px; }
-  .exp-date {
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 12px;
-    color: var(--muted);
-    background: var(--bg3);
-    border: 1px solid var(--border);
-    border-radius: 20px;
-    padding: 4px 12px;
-    white-space: nowrap;
-  }
-  .exp-desc { margin-top: 16px; color: var(--text2); font-size: 14px; line-height: 1.75; }
-  .exp-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
-  .exp-tag {
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 11px;
-    color: var(--muted);
-    background: var(--bg3);
-    border: 1px solid var(--border);
-    border-radius: 4px;
-    padding: 3px 10px;
-  }
+/* EXP */
+.exp-list{display:flex;flex-direction:column;gap:2px;}
+.exp-card{
+  background:var(--panel);
+  border:1px solid var(--line);
+  border-left:3px solid var(--line);
+  border-radius:4px;
+  padding:32px 36px;
+  transition:border-left-color .2s,background .2s;
+  cursor:default;
+}
+.exp-card:hover{
+  border-left-color:var(--blue);
+  background:var(--navy3);
+}
+.exp-top{
+  display:flex;justify-content:space-between;
+  align-items:flex-start;flex-wrap:wrap;gap:12px;
+  margin-bottom:8px;
+}
+.exp-role{
+  font-family:'Rajdhani',sans-serif;
+  font-size:22px;font-weight:700;color:var(--white);
+}
+.exp-co{
+  font-size:13px;color:var(--blue);
+  font-weight:500;margin-top:2px;
+  font-family:'Share Tech Mono',monospace;
+  letter-spacing:.5px;
+}
+.exp-period{
+  font-family:'Share Tech Mono',monospace;
+  font-size:11px;color:var(--muted);
+  background:var(--navy);
+  border:1px solid var(--line);
+  border-radius:2px;
+  padding:5px 14px;letter-spacing:1px;
+  white-space:nowrap;
+}
+.exp-body{
+  font-size:14px;color:var(--text2);
+  line-height:1.8;margin-top:14px;font-weight:300;
+}
+.exp-body li{margin-bottom:4px;margin-left:16px;}
+.tag-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px;}
+.tag{
+  font-family:'Share Tech Mono',monospace;
+  font-size:10px;color:var(--muted);
+  background:var(--navy);
+  border:1px solid var(--line);
+  border-radius:2px;padding:3px 10px;
+  letter-spacing:.5px;
+}
 
-  /* CERTS */
-  .certs-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
-  .cert-card {
-    background: var(--bg2);
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    padding: 28px;
-    transition: border-color 0.2s, transform 0.2s;
-  }
-  .cert-card:hover { border-color: var(--accent); transform: translateY(-3px); }
-  .cert-issuer { font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: var(--accent); letter-spacing: 1px; text-transform: uppercase; margin-bottom: 10px; }
-  .cert-name { font-family: 'Syne', sans-serif; font-size: 17px; font-weight: 700; line-height: 1.3; margin-bottom: 8px; }
-  .cert-date { font-size: 13px; color: var(--muted); }
-  .cert-id { font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: var(--dim); margin-top: 8px; word-break: break-all; }
+/* CERTS */
+.certs-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  gap:20px;
+}
+.cert-card{
+  background:var(--panel);
+  border:1px solid var(--line);
+  border-radius:4px;padding:28px;
+  transition:border-color .2s,transform .2s;
+  position:relative;overflow:hidden;
+}
+.cert-card::before{
+  content:'';
+  position:absolute;top:0;left:0;right:0;height:2px;
+  background:linear-gradient(90deg,var(--blue),var(--cyan));
+  opacity:0;transition:opacity .2s;
+}
+.cert-card:hover::before{opacity:1;}
+.cert-card:hover{border-color:var(--steel);transform:translateY(-3px);}
+.cert-org{
+  font-family:'Share Tech Mono',monospace;
+  font-size:10px;color:var(--blue);
+  letter-spacing:2px;text-transform:uppercase;
+  margin-bottom:10px;
+}
+.cert-name{
+  font-family:'Rajdhani',sans-serif;
+  font-size:17px;font-weight:700;
+  color:var(--white);line-height:1.3;
+  margin-bottom:8px;
+}
+.cert-meta{
+  font-family:'Share Tech Mono',monospace;
+  font-size:11px;color:var(--muted);
+  line-height:1.6;
+}
+.cert-verify{
+  display:inline-block;margin-top:14px;
+  font-family:'Share Tech Mono',monospace;
+  font-size:11px;color:var(--cyan);
+  text-decoration:none;letter-spacing:.5px;
+  transition:opacity .2s;
+}
+.cert-verify:hover{opacity:.7;}
 
-  /* CONTACT */
-  #contact { background: var(--bg2); max-width: 100%; padding: 100px 60px; }
-  #contact .inner { max-width: 1100px; margin: 0 auto; }
-  .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; }
-  .contact-link {
-    display: flex; align-items: center; gap: 16px;
-    padding: 20px 24px;
-    background: var(--bg3);
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    text-decoration: none;
-    margin-bottom: 12px;
-    transition: border-color 0.2s;
-    color: var(--text);
-  }
-  .contact-link:hover { border-color: var(--accent); }
-  .contact-icon { font-size: 20px; width: 40px; text-align: center; }
-  .contact-label { font-size: 12px; color: var(--muted); font-family: 'IBM Plex Mono', monospace; }
-  .contact-value { font-size: 14px; color: var(--text); margin-top: 2px; }
+/* CONTACT */
+#contact{background:var(--navy2);}
+.contact-grid{
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:64px;align-items:start;
+}
+.contact-lead{
+  font-family:'Rajdhani',sans-serif;
+  font-size:15px;color:var(--text2);
+  line-height:1.9;font-weight:400;
+  margin-bottom:36px;
+}
+.c-link{
+  display:flex;align-items:center;gap:20px;
+  padding:18px 24px;
+  background:var(--panel);
+  border:1px solid var(--line);
+  border-radius:4px;
+  text-decoration:none;
+  margin-bottom:10px;
+  transition:border-color .2s;
+  color:var(--text);
+}
+.c-link:hover{border-color:var(--blue);}
+.c-icon{
+  font-family:'Share Tech Mono',monospace;
+  font-size:10px;color:var(--muted);
+  letter-spacing:2px;width:36px;text-align:center;
+}
+.c-key{
+  font-family:'Share Tech Mono',monospace;
+  font-size:10px;color:var(--muted);
+  letter-spacing:1px;text-transform:uppercase;
+}
+.c-val{font-size:14px;color:var(--text);margin-top:2px;}
 
-  /* FOOTER */
-  footer {
-    text-align: center;
-    padding: 40px 60px;
-    border-top: 1px solid var(--border);
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 12px;
-    color: var(--muted);
-  }
+.avail-card{
+  background:var(--panel);
+  border:1px solid var(--line);
+  border-radius:4px;padding:32px;
+}
+.avail-title{
+  font-family:'Rajdhani',sans-serif;
+  font-size:13px;font-weight:600;
+  color:var(--muted);letter-spacing:2px;
+  text-transform:uppercase;margin-bottom:20px;
+  padding-bottom:16px;border-bottom:1px solid var(--line);
+}
+.avail-item{
+  display:flex;align-items:flex-start;gap:12px;
+  padding:10px 0;border-bottom:1px solid rgba(26,46,72,.4);
+}
+.avail-item:last-of-type{border-bottom:none;}
+.avail-dot{
+  width:6px;height:6px;border-radius:50%;
+  background:var(--cyan);margin-top:6px;flex-shrink:0;
+}
+.avail-text{font-size:14px;color:var(--text2);}
+.lang-row{
+  margin-top:24px;padding-top:20px;
+  border-top:1px solid var(--line);
+}
+.lang-row .c-key{margin-bottom:10px;display:block;}
+.lang-chips{display:flex;gap:8px;flex-wrap:wrap;}
+.lang-chip{
+  font-family:'Share Tech Mono',monospace;
+  font-size:11px;color:var(--text2);
+  border:1px solid var(--line);
+  border-radius:2px;padding:4px 12px;
+}
 
-  /* ANIMATIONS */
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-  .reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.7s, transform 0.7s; }
-  .reveal.visible { opacity: 1; transform: translateY(0); }
+footer{
+  border-top:1px solid var(--line);
+  padding:28px 64px;
+  display:flex;justify-content:space-between;align-items:center;
+  position:relative;z-index:1;flex-wrap:wrap;gap:12px;
+}
+.footer-name{
+  font-family:'Rajdhani',sans-serif;
+  font-size:15px;font-weight:700;color:var(--white);
+  letter-spacing:1px;
+}
+.footer-right{
+  font-family:'Share Tech Mono',monospace;
+  font-size:11px;color:var(--muted);
+}
 
-  /* RESPONSIVE */
-  @media (max-width: 768px) {
-    nav { padding: 16px 24px; }
-    .nav-links { display: none; }
-    #hero { padding: 120px 24px 80px; }
-    section { padding: 80px 24px; }
-    #skills, #contact { padding: 80px 24px; }
-    .hero-name { letter-spacing: -2px; }
-    .contact-grid { grid-template-columns: 1fr; gap: 40px; }
-    .section-title { font-size: 32px; }
-    .hero-stats { gap: 32px; }
-  }
+/* ANIMATIONS */
+@keyframes fadeUp{
+  from{opacity:0;transform:translateY(24px)}
+  to{opacity:1;transform:translateY(0)}
+}
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .6s,transform .6s;}
+.reveal.on{opacity:1;transform:none;}
 
-  /* Scrollbar */
-  ::-webkit-scrollbar { width: 6px; }
-  ::-webkit-scrollbar-track { background: var(--bg); }
-  ::-webkit-scrollbar-thumb { background: var(--dim); border-radius: 3px; }
+/* RESPONSIVE */
+@media(max-width:900px){
+  nav{padding:0 24px;}
+  .nav-links{display:none;}
+  #hero{padding:100px 24px 60px;}
+  .hero-grid{grid-template-columns:1fr;gap:48px;}
+  .wrap{padding:0 24px;}
+  .stats-inner{grid-template-columns:repeat(2,1fr);padding:0 24px;}
+  .contact-grid{grid-template-columns:1fr;gap:40px;}
+  footer{padding:24px;}
+}
+
+::-webkit-scrollbar{width:5px;}
+::-webkit-scrollbar-track{background:var(--navy);}
+::-webkit-scrollbar-thumb{background:var(--steel);border-radius:2px;}
 </style>
 </head>
 <body>
 
 <nav>
-  <div class="nav-logo">MH.</div>
+  <div class="nav-logo">M<span>.</span>Hassan</div>
   <div class="nav-links">
-    <a href="#about">About</a>
     <a href="#skills">Skills</a>
     <a href="#experience">Experience</a>
-    <a href="#certifications">Certs</a>
+    <a href="#certifications">Certifications</a>
     <a href="#contact">Contact</a>
   </div>
 </nav>
 
 <!-- HERO -->
 <div id="hero">
-  <div class="hero-inner">
-    <p class="hero-tag">// Data Analyst · Rawalpindi, Pakistan</p>
-    <h1 class="hero-name">Mubashir<br/><span>Hassan.</span></h1>
-    <p class="hero-sub">I turn messy data into clean dashboards, actionable reports, and decisions that actually make sense. Power BI · SQL · Looker Studio · Excel · Python.</p>
-    <div class="hero-cta">
-      <a href="#contact" class="btn-primary">Get in Touch</a>
-      <a href="#experience" class="btn-outline">View Experience</a>
+  <div class="hero-grid">
+    <div>
+      <p class="hero-eyebrow">// Data Analyst — Rawalpindi, Pakistan</p>
+      <h1 class="hero-name">Mubashir<br/><span class="line2">Hassan</span></h1>
+      <p class="hero-role">Data Analyst</p>
+      <p class="hero-desc">Transforming raw data into structured insights, automated reports, and business-ready dashboards. Specialized in Power BI, SQL, Looker Studio, and Excel across logistics, e-commerce, and operations.</p>
+      <div class="hero-btns">
+        <a href="#contact" class="btn-p">Contact Me</a>
+        <a href="#experience" class="btn-o">View Experience</a>
+      </div>
     </div>
-    <div class="hero-stats">
-      <div>
-        <div class="stat-num">3+</div>
-        <div class="stat-label">Years of Experience</div>
+    <div class="hero-card">
+      <div class="hc-label">// Profile Status</div>
+      <div class="hc-row">
+        <span class="hc-key">STATUS</span>
+        <span class="hc-val accent"><span class="status-dot"></span>Open to Work</span>
       </div>
-      <div>
-        <div class="stat-num">4+</div>
-        <div class="stat-label">Certifications</div>
+      <div class="hc-row">
+        <span class="hc-key">LOCATION</span>
+        <span class="hc-val">Rawalpindi, PK</span>
       </div>
-      <div>
-        <div class="stat-num">10+</div>
-        <div class="stat-label">Tools & Technologies</div>
+      <div class="hc-row">
+        <span class="hc-key">EDUCATION</span>
+        <span class="hc-val">BS Electrical Eng.</span>
       </div>
-      <div>
-        <div class="stat-num">4</div>
-        <div class="stat-label">Languages Spoken</div>
+      <div class="hc-row">
+        <span class="hc-key">EXPERIENCE</span>
+        <span class="hc-val">3+ Years</span>
       </div>
+      <div class="hc-row">
+        <span class="hc-key">CERTIFICATIONS</span>
+        <span class="hc-val">4+</span>
+      </div>
+      <div class="hc-row">
+        <span class="hc-key">LINKEDIN</span>
+        <span class="hc-val accent">mubashir-hassan-noori</span>
+      </div>
+      <div class="hc-row">
+        <span class="hc-key">GITHUB</span>
+        <span class="hc-val accent">mubashirnoori</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- STATS -->
+<div class="stats-bar">
+  <div class="stats-inner">
+    <div class="stat-item">
+      <div class="stat-n">3<span class="stat-u">+</span></div>
+      <div class="stat-l">Years Experience</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-n">10<span class="stat-u">+</span></div>
+      <div class="stat-l">Tools & Technologies</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-n">4<span class="stat-u">+</span></div>
+      <div class="stat-l">Certifications</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-n">4</div>
+      <div class="stat-l">Languages Spoken</div>
     </div>
   </div>
 </div>
 
 <!-- SKILLS -->
 <div id="skills">
-  <div class="inner">
-    <p class="section-label reveal">// 02. toolkit</p>
-    <h2 class="section-title reveal">Skills &<br/>Technologies</h2>
-    <div class="skills-grid">
-      <div class="skill-card reveal">
-        <div class="skill-icon">📊</div>
-        <div class="skill-name">Power BI</div>
-        <div class="skill-level">Advanced</div>
-        <div class="skill-bar-wrap"><div class="skill-bar" style="width:85%"></div></div>
+  <div class="wrap">
+    <div class="section">
+      <div class="sec-head reveal">
+        <div class="sec-num">// 01 — Skills & Technologies</div>
+        <h2 class="sec-title">Technical <span>Stack</span></h2>
+        <div class="sec-line"></div>
       </div>
-      <div class="skill-card reveal">
-        <div class="skill-icon">🔍</div>
-        <div class="skill-name">Looker Studio</div>
-        <div class="skill-level">Advanced</div>
-        <div class="skill-bar-wrap"><div class="skill-bar" style="width:82%"></div></div>
-      </div>
-      <div class="skill-card reveal">
-        <div class="skill-icon">📋</div>
-        <div class="skill-name">SQL</div>
-        <div class="skill-level">Intermediate</div>
-        <div class="skill-bar-wrap"><div class="skill-bar" style="width:75%"></div></div>
-      </div>
-      <div class="skill-card reveal">
-        <div class="skill-icon">📈</div>
-        <div class="skill-name">Excel / Sheets</div>
-        <div class="skill-level">Advanced</div>
-        <div class="skill-bar-wrap"><div class="skill-bar" style="width:90%"></div></div>
-      </div>
-      <div class="skill-card reveal">
-        <div class="skill-icon">🐍</div>
-        <div class="skill-name">Python</div>
-        <div class="skill-level">Beginner–Intermediate</div>
-        <div class="skill-bar-wrap"><div class="skill-bar" style="width:45%"></div></div>
-      </div>
-      <div class="skill-card reveal">
-        <div class="skill-icon">📉</div>
-        <div class="skill-name">Tableau</div>
-        <div class="skill-level">Intermediate</div>
-        <div class="skill-bar-wrap"><div class="skill-bar" style="width:65%"></div></div>
-      </div>
-      <div class="skill-card reveal">
-        <div class="skill-icon">📡</div>
-        <div class="skill-name">GA4 / Analytics / Jira</div>
-        <div class="skill-level">Intermediate</div>
-        <div class="skill-bar-wrap"><div class="skill-bar" style="width:65%"></div></div>
-      </div>
-      <div class="skill-card reveal">
-        <div class="skill-icon">🌐</div>
-        <div class="skill-name">HTML / CSS / PHP</div>
-        <div class="skill-level">Intermediate</div>
-        <div class="skill-bar-wrap"><div class="skill-bar" style="width:60%"></div></div>
-      </div>
-      <div class="skill-card reveal">
-        <div class="skill-icon">📦</div>
-        <div class="skill-name">Inventory</div>
-        <div class="skill-level">Advanced</div>
-        <div class="skill-bar-wrap"><div class="skill-bar" style="width:88%"></div></div>
-      </div>
-      <div class="skill-card reveal">
-        <div class="skill-icon">📐</div>
-        <div class="skill-name">R Programming</div>
-        <div class="skill-level">Basic</div>
-        <div class="skill-bar-wrap"><div class="skill-bar" style="width:40%"></div></div>
-      </div>
+      <table class="skills-table reveal">
+        <thead>
+          <tr>
+            <th>Tool / Technology</th>
+            <th>Category</th>
+            <th colspan="2">Proficiency</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="skill-name-cell">Excel / Google Sheets</td>
+            <td class="skill-cat">Spreadsheets</td>
+            <td class="skill-bar-cell"><div class="bar-track"><div class="bar-fill" style="width:92%"></div></div></td>
+            <td class="skill-pct">92%</td>
+          </tr>
+          <tr>
+            <td class="skill-name-cell">Power BI</td>
+            <td class="skill-cat">BI & Dashboards</td>
+            <td class="skill-bar-cell"><div class="bar-track"><div class="bar-fill" style="width:85%"></div></div></td>
+            <td class="skill-pct">85%</td>
+          </tr>
+          <tr>
+            <td class="skill-name-cell">Looker Studio</td>
+            <td class="skill-cat">BI & Dashboards</td>
+            <td class="skill-bar-cell"><div class="bar-track"><div class="bar-fill" style="width:82%"></div></div></td>
+            <td class="skill-pct">82%</td>
+          </tr>
+          <tr>
+            <td class="skill-name-cell">SQL</td>
+            <td class="skill-cat">Data Querying</td>
+            <td class="skill-bar-cell"><div class="bar-track"><div class="bar-fill" style="width:78%"></div></div></td>
+            <td class="skill-pct">78%</td>
+          </tr>
+          <tr>
+            <td class="skill-name-cell">GA4 / Analytics</td>
+            <td class="skill-cat">Web Analytics</td>
+            <td class="skill-bar-cell"><div class="bar-track"><div class="bar-fill" style="width:70%"></div></div></td>
+            <td class="skill-pct">70%</td>
+          </tr>
+          <tr>
+            <td class="skill-name-cell">Tableau</td>
+            <td class="skill-cat">Visualization</td>
+            <td class="skill-bar-cell"><div class="bar-track"><div class="bar-fill" style="width:65%"></div></div></td>
+            <td class="skill-pct">65%</td>
+          </tr>
+          <tr>
+            <td class="skill-name-cell">HTML / CSS / PHP</td>
+            <td class="skill-cat">Web Dev</td>
+            <td class="skill-bar-cell"><div class="bar-track"><div class="bar-fill" style="width:62%"></div></div></td>
+            <td class="skill-pct">62%</td>
+          </tr>
+          <tr>
+            <td class="skill-name-cell">Python</td>
+            <td class="skill-cat">Programming</td>
+            <td class="skill-bar-cell"><div class="bar-track"><div class="bar-fill" style="width:48%"></div></div></td>
+            <td class="skill-pct">48%</td>
+          </tr>
+          <tr>
+            <td class="skill-name-cell">R Programming</td>
+            <td class="skill-cat">Statistical</td>
+            <td class="skill-bar-cell"><div class="bar-track"><div class="bar-fill" style="width:40%"></div></div></td>
+            <td class="skill-pct">40%</td>
+          </tr>
+          <tr>
+            <td class="skill-name-cell">Jira ERP</td>
+            <td class="skill-cat">Inventory / Jira</td>
+            <td class="skill-bar-cell"><div class="bar-track"><div class="bar-fill" style="width:88%"></div></div></td>
+            <td class="skill-pct">88%</td>
+          </tr>
+        </tbody>
+      </table>
     </div>
   </div>
 </div>
 
 <!-- EXPERIENCE -->
-<section id="experience">
-  <p class="section-label reveal">// 03. experience</p>
-  <h2 class="section-title reveal">Work<br/>History</h2>
-  <div class="exp-list">
-    <div class="exp-item reveal">
-      <div class="exp-header">
-        <div>
-          <div class="exp-role">Associate Inventory Manager</div>
-          <div class="exp-company">Maven Projects (October Holdings)</div>
+<div id="experience">
+  <div class="wrap">
+    <div class="section">
+      <div class="sec-head reveal">
+        <div class="sec-num">// 02 — Work History</div>
+        <h2 class="sec-title">Professional <span>Experience</span></h2>
+        <div class="sec-line"></div>
+      </div>
+      <div class="exp-list">
+        <div class="exp-card reveal">
+          <div class="exp-top">
+            <div>
+              <div class="exp-role">Associate Inventory Manager</div>
+              <div class="exp-co">Maven Projects (October Holdings)</div>
+            </div>
+            <span class="exp-period">AUG 2022 — PRESENT</span>
+          </div>
+          <ul class="exp-body">
+            <li>Managed end-to-end inventory data using Lira ERP and Excel across multiple product lines</li>
+            <li>Built and maintained sales dashboards and operational reports for senior decision-making</li>
+            <li>Coordinated shipment and logistics data with TCS, SWYFt, and FedEx; resolved data discrepancies</li>
+            <li>Automated recurring reports using Excel formulas and macros, reducing manual workload</li>
+            <li>Handled CN creation, daily operational records, and stock reconciliation</li>
+          </ul>
+          <div class="tag-row">
+            <span class="tag">Excel</span><span class="tag">Lira ERP</span>
+            <span class="tag">Dashboard Reporting</span><span class="tag">Logistics Data</span>
+            <span class="tag">Inventory Management</span>
+          </div>
         </div>
-        <span class="exp-date">Aug 2022 — Present</span>
-      </div>
-      <p class="exp-desc">
-        Managing end-to-end inventory data and operational reporting for an e-commerce operation. Built Excel-based sales dashboards and automated recurring reports. Coordinated logistics data with TCS, SWYFt, and FedEx, managing CN creation and shipment tracking.
-      </p>
-      <div class="exp-tags">
-        <span class="exp-tag">Excel</span>
-        <span class="exp-tag">Lira ERP</span>
-        <span class="exp-tag">Data Reporting</span>
-        <span class="exp-tag">Logistics</span>
-        <span class="exp-tag">Dashboard Design</span>
-      </div>
-    </div>
-    <div class="exp-item reveal">
-      <div class="exp-header">
-        <div>
-          <div class="exp-role">Customer Service Representative</div>
-          <div class="exp-company">Jazz</div>
+        <div class="exp-card reveal">
+          <div class="exp-top">
+            <div>
+              <div class="exp-role">Customer Service Representative</div>
+              <div class="exp-co">Jazz</div>
+            </div>
+            <span class="exp-period">APR 2022 — JUL 2022</span>
+          </div>
+          <ul class="exp-body">
+            <li>Managed customer account records and billing data with high accuracy</li>
+            <li>Resolved data-related issues using structured troubleshooting approaches</li>
+            <li>Maintained CRM data integrity and contributed to team reporting</li>
+          </ul>
+          <div class="tag-row">
+            <span class="tag">CRM Data</span><span class="tag">Billing Records</span>
+            <span class="tag">Data Accuracy</span>
+          </div>
         </div>
-        <span class="exp-date">Apr 2022 — Jul 2022</span>
-      </div>
-      <p class="exp-desc">
-        Managed customer accounts and billing records. Handled data-driven troubleshooting, maintained CRM data accuracy, and supported team reporting. Developed strong communication skills in translating data issues to non-technical stakeholders.
-      </p>
-      <div class="exp-tags">
-        <span class="exp-tag">CRM Data</span>
-        <span class="exp-tag">Billing Records</span>
-        <span class="exp-tag">Reporting</span>
-      </div>
-    </div>
-    <div class="exp-item reveal">
-      <div class="exp-header">
-        <div>
-          <div class="exp-role">Hub Assistant</div>
-          <div class="exp-company">Daraz</div>
+        <div class="exp-card reveal">
+          <div class="exp-top">
+            <div>
+              <div class="exp-role">Hub Assistant</div>
+              <div class="exp-co">Daraz</div>
+            </div>
+            <span class="exp-period">SEP 2021 — DEC 2021</span>
+          </div>
+          <ul class="exp-body">
+            <li>Managed inbound and outbound inventory data at a high-volume e-commerce hub</li>
+            <li>Generated daily stock movement reports supporting warehouse operations</li>
+            <li>Ensured data accuracy through precise entry and reconciliation</li>
+          </ul>
+          <div class="tag-row">
+            <span class="tag">Inventory Data</span><span class="tag">Excel Reports</span>
+            <span class="tag">E-commerce</span>
+          </div>
         </div>
-        <span class="exp-date">Sep 2021 — Dec 2021</span>
-      </div>
-      <p class="exp-desc">
-        Managed inbound and outbound inventory data at a major e-commerce hub. Generated daily stock movement reports and supported warehouse operations through precise data entry and reconciliation.
-      </p>
-      <div class="exp-tags">
-        <span class="exp-tag">Inventory Data</span>
-        <span class="exp-tag">Excel Reports</span>
-        <span class="exp-tag">E-commerce</span>
       </div>
     </div>
   </div>
-</section>
+</div>
 
 <!-- CERTIFICATIONS -->
-<section id="certifications" style="background:var(--bg2);max-width:100%;padding:100px 60px;">
-  <div style="max-width:1100px;margin:0 auto;">
-    <p class="section-label reveal">// 04. certifications</p>
-    <h2 class="section-title reveal">Credentials &<br/>Certifications</h2>
-    <div class="certs-grid">
-      <div class="cert-card reveal">
-        <div class="cert-issuer">Google / Coursera</div>
-        <div class="cert-name">Google Data Analytics Professional Certificate</div>
-        <div class="cert-date">July 2023 · 8 Courses</div>
-        <div class="cert-id">ID: 7WBPK263WYEP</div>
-        <div style="margin-top:16px;">
-          <a href="https://coursera.org/verify/professional-cert/7WBPK263WYEP" target="_blank" style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--accent);text-decoration:none;">Verify Certificate →</a>
+<div id="certifications" style="background:var(--navy2);">
+  <div class="wrap">
+    <div class="section">
+      <div class="sec-head reveal">
+        <div class="sec-num">// 03 — Credentials</div>
+        <h2 class="sec-title">Certifications &<span> Education</span></h2>
+        <div class="sec-line"></div>
+      </div>
+      <div class="certs-grid">
+        <div class="cert-card reveal">
+          <div class="cert-org">Google / Coursera</div>
+          <div class="cert-name">Google Data Analytics Professional Certificate</div>
+          <div class="cert-meta">
+            Jul 2023 &nbsp;·&nbsp; 8 Courses Completed<br/>
+            ID: 7WBPK263WYEP
+          </div>
+          <a class="cert-verify" href="https://coursera.org/verify/professional-cert/7WBPK263WYEP" target="_blank">VERIFY CERTIFICATE →</a>
         </div>
-      </div>
-      <div class="cert-card reveal">
-        <div class="cert-issuer">Virtual University / Ignite</div>
-        <div class="cert-name">Digital Literacy — DigiSkills Training Program</div>
-        <div class="cert-date">March 2026 · DSTP3.0-Batch-02</div>
-        <div class="cert-id">ID: WT6BX4UMK</div>
-        <div style="margin-top:16px;">
-          <a href="https://digiskills.pk/verify" target="_blank" style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--accent);text-decoration:none;">Verify Certificate →</a>
+        <div class="cert-card reveal">
+          <div class="cert-org">Virtual University / Ignite</div>
+          <div class="cert-name">Digital Literacy — DigiSkills Training Program</div>
+          <div class="cert-meta">
+            Mar 2026 &nbsp;·&nbsp; DSTP3.0-Batch-02<br/>
+            ID: WT6BX4UMK
+          </div>
+          <a class="cert-verify" href="https://digiskills.pk/verify" target="_blank">VERIFY CERTIFICATE →</a>
         </div>
-      </div>
-      <div class="cert-card reveal">
-        <div class="cert-issuer">Great Learning Academy</div>
-        <div class="cert-name">ChatGPT for Excel</div>
-        <div class="cert-date">September 2023</div>
-      </div>
-      <div class="cert-card reveal">
-        <div class="cert-issuer">Bootcamp</div>
-        <div class="cert-name">Data Analytics Bootcamp</div>
-        <div class="cert-date">Certificate of Completion</div>
+        <div class="cert-card reveal">
+          <div class="cert-org">Great Learning Academy</div>
+          <div class="cert-name">ChatGPT for Excel</div>
+          <div class="cert-meta">September 2023</div>
+        </div>
+        <div class="cert-card reveal">
+          <div class="cert-org">Bootcamp</div>
+          <div class="cert-name">Data Analytics Bootcamp</div>
+          <div class="cert-meta">Certificate of Completion</div>
+        </div>
+        <div class="cert-card reveal" style="border-color:var(--steel);">
+          <div class="cert-org">FUUAST · Islamabad</div>
+          <div class="cert-name">BS Electrical Engineering</div>
+          <div class="cert-meta">
+            2015 – 2019<br/>
+            Final project: Hexa Copter drone with explosive & metal detection sensors
+          </div>
+        </div>
       </div>
     </div>
   </div>
-</section>
-
-<!-- EDUCATION -->
-<section id="about">
-  <p class="section-label reveal">// 05. education</p>
-  <h2 class="section-title reveal">Education</h2>
-  <div class="exp-item reveal">
-    <div class="exp-header">
-      <div>
-        <div class="exp-role">BS Electrical Engineering</div>
-        <div class="exp-company">Federal Urdu University of Arts, Science &amp; Technology (FUUAST)</div>
-      </div>
-      <span class="exp-date">2015 — 2019 · Islamabad</span>
-    </div>
-    <p class="exp-desc">
-      Graduated with a strong foundation in electronics, programming, and systems design. Final year project: a Hexa Copter drone equipped with explosive and metal detection sensors, including motion and heat sensing capabilities.
-    </p>
-    <div class="exp-tags">
-      <span class="exp-tag">Electrical Engineering</span>
-      <span class="exp-tag">Electronics</span>
-      <span class="exp-tag">Programming Fundamentals</span>
-      <span class="exp-tag">Sensor Systems</span>
-    </div>
-  </div>
-</section>
+</div>
 
 <!-- CONTACT -->
 <div id="contact">
-  <div class="inner">
-    <p class="section-label reveal">// 06. contact</p>
-    <h2 class="section-title reveal">Let's<br/>Work Together.</h2>
-    <div class="contact-grid">
-      <div>
-        <p style="color:var(--text2);font-size:15px;line-height:1.8;margin-bottom:32px;">
-          I'm open to Data Analyst, BI Analyst, and Reporting roles — both in Pakistan and remote. If you have a project or opportunity, I'd love to hear about it.
-        </p>
-        <a href="mailto:mubashirbaltistani1@gmail.com" class="contact-link">
-          <span class="contact-icon">✉</span>
-          <div>
-            <div class="contact-label">Email</div>
-            <div class="contact-value">mubashirbaltistani1@gmail.com</div>
-          </div>
-        </a>
-        <a href="tel:+923145525749" class="contact-link">
-          <span class="contact-icon">📞</span>
-          <div>
-            <div class="contact-label">Phone / WhatsApp</div>
-            <div class="contact-value">+92 314 5525749</div>
-          </div>
-        </a>
-        <a href="https://linkedin.com/in/mubashir-hassan-noori" target="_blank" class="contact-link">
-          <span class="contact-icon">in</span>
-          <div>
-            <div class="contact-label">LinkedIn</div>
-            <div class="contact-value">linkedin.com/in/mubashir-hassan-noori</div>
-          </div>
-        </a>
-        <a href="https://github.com/mubashirnoori" target="_blank" class="contact-link" id="github-link">
-          <span class="contact-icon">⌥</span>
-          <div>
-            <div class="contact-label">GitHub</div>
-            <div class="contact-value">github.com/mubashirnoori</div>
-          </div>
-        </a>
+  <div class="wrap">
+    <div class="section">
+      <div class="sec-head reveal">
+        <div class="sec-num">// 04 — Get In Touch</div>
+        <h2 class="sec-title">Contact <span>&amp; Availability</span></h2>
+        <div class="sec-line"></div>
       </div>
-      <div style="display:flex;flex-direction:column;justify-content:center;">
-        <div style="background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:32px;">
-          <p style="font-family:'Syne',sans-serif;font-weight:700;font-size:18px;margin-bottom:16px;">Currently available for</p>
-          <div style="display:flex;flex-direction:column;gap:12px;">
-            <div style="display:flex;align-items:center;gap:12px;">
-              <span style="color:var(--accent);font-size:18px;">✓</span>
-              <span style="color:var(--text2);font-size:14px;">Full-time Data Analyst roles</span>
-            </div>
-            <div style="display:flex;align-items:center;gap:12px;">
-              <span style="color:var(--accent);font-size:18px;">✓</span>
-              <span style="color:var(--text2);font-size:14px;">BI & Dashboard freelance projects</span>
-            </div>
-            <div style="display:flex;align-items:center;gap:12px;">
-              <span style="color:var(--accent);font-size:18px;">✓</span>
-              <span style="color:var(--text2);font-size:14px;">Remote / hybrid opportunities</span>
-            </div>
-            <div style="display:flex;align-items:center;gap:12px;">
-              <span style="color:var(--accent);font-size:18px;">✓</span>
-              <span style="color:var(--text2);font-size:14px;">Data reporting & Excel automation</span>
-            </div>
+      <div class="contact-grid">
+        <div>
+          <p class="contact-lead reveal">Open to full-time Data Analyst positions, BI dashboard projects, and remote opportunities across Pakistan and internationally. Response within 24 hours.</p>
+          <a href="mailto:mubashirbaltistani1@gmail.com" class="c-link reveal">
+            <span class="c-icon">MAIL</span>
+            <div><div class="c-key">Email</div><div class="c-val">mubashirbaltistani1@gmail.com</div></div>
+          </a>
+          <a href="tel:+923145525749" class="c-link reveal">
+            <span class="c-icon">TEL</span>
+            <div><div class="c-key">Phone / WhatsApp</div><div class="c-val">+92 314 5525749</div></div>
+          </a>
+          <a href="https://linkedin.com/in/mubashir-hassan-noori" target="_blank" class="c-link reveal">
+            <span class="c-icon">LI</span>
+            <div><div class="c-key">LinkedIn</div><div class="c-val">mubashir-hassan-noori</div></div>
+          </a>
+          <a href="https://github.com/mubashirnoori" target="_blank" class="c-link reveal">
+            <span class="c-icon">GH</span>
+            <div><div class="c-key">GitHub</div><div class="c-val">github.com/mubashirnoori</div></div>
+          </a>
+        </div>
+        <div class="avail-card reveal">
+          <div class="avail-title">// Current Availability</div>
+          <div class="avail-item">
+            <div class="avail-dot"></div>
+            <div class="avail-text">Full-time Data Analyst roles</div>
           </div>
-          <div style="margin-top:28px;padding-top:24px;border-top:1px solid var(--border);">
-            <p style="font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--muted);margin-bottom:8px;">Languages spoken</p>
-            <p style="font-size:14px;color:var(--text2);">Urdu · English · Balti · Shina</p>
+          <div class="avail-item">
+            <div class="avail-dot"></div>
+            <div class="avail-text">Power BI / Looker Studio dashboard projects</div>
+          </div>
+          <div class="avail-item">
+            <div class="avail-dot"></div>
+            <div class="avail-text">Remote & hybrid opportunities</div>
+          </div>
+          <div class="avail-item">
+            <div class="avail-dot"></div>
+            <div class="avail-text">Excel automation & reporting</div>
+          </div>
+          <div class="avail-item">
+            <div class="avail-dot"></div>
+            <div class="avail-text">Freelance data & analytics work</div>
+          </div>
+          <div class="lang-row">
+            <span class="c-key">Languages</span>
+            <div class="lang-chips">
+              <span class="lang-chip">Urdu</span>
+              <span class="lang-chip">English</span>
+              <span class="lang-chip">Balti</span>
+              <span class="lang-chip">Shina</span>
+            </div>
           </div>
         </div>
       </div>
@@ -633,20 +851,21 @@
 </div>
 
 <footer>
-  <p>Built & designed by Mubashir Hassan · 2025 · Rawalpindi, Pakistan</p>
+  <div class="footer-name">Mubashir Hassan — Data Analyst</div>
+  <div class="footer-right">mubashirnoori.github.io &nbsp;·&nbsp; Rawalpindi, Pakistan &nbsp;·&nbsp; 2025</div>
 </footer>
 
 <script>
-  const reveals = document.querySelectorAll('.reveal');
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach((e, i) => {
-      if (e.isIntersecting) {
-        setTimeout(() => e.target.classList.add('visible'), i * 60);
-        observer.unobserve(e.target);
-      }
-    });
-  }, { threshold: 0.1 });
-  reveals.forEach(r => observer.observe(r));
+const els = document.querySelectorAll('.reveal');
+const obs = new IntersectionObserver(entries => {
+  entries.forEach((e,i) => {
+    if(e.isIntersecting){
+      setTimeout(()=>e.target.classList.add('on'), i*80);
+      obs.unobserve(e.target);
+    }
+  });
+},{threshold:0.08});
+els.forEach(e=>obs.observe(e));
 </script>
 </body>
 </html>
