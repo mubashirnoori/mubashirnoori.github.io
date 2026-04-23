@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Mubashir Hassan — Data Analyst</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;700;800&family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@300;400;500&display=swap" rel="stylesheet"/>
+<style>
+  :root {
+    --bg: #0a0f0d;
+    --bg2: #111813;
+    --bg3: #162019;
+    --accent: #00e87a;
+    --accent2: #00c465;
+    --dim: #3a4d41;
+    --muted: #6b8575;
+    --text: #e8f2ec;
+    --text2: #a8c4b4;
+    --border: #1e2e25;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  /* noise texture overlay */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.4;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 20px 60px;
+    background: rgba(10,15,13,0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-logo {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 18px;
+    color: var(--accent);
+    letter-spacing: -0.5px;
+  }
+  .nav-links { display: flex; gap: 32px; }
+  .nav-links a {
+    font-size: 13px;
+    font-family: 'IBM Plex Mono', monospace;
+    color: var(--muted);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--accent); }
+
+  /* SECTIONS */
+  section { position: relative; z-index: 1; padding: 100px 60px; max-width: 1100px; margin: 0 auto; }
+
+  /* HERO */
+  #hero {
+    min-height: 100vh;
+    display: flex; flex-direction: column; justify-content: center;
+    padding-top: 140px;
+    max-width: 100%;
+    padding-left: 60px; padding-right: 60px;
+  }
+  .hero-inner { max-width: 1100px; margin: 0 auto; width: 100%; }
+  .hero-tag {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 13px;
+    color: var(--accent);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 24px;
+    opacity: 0;
+    animation: fadeUp 0.7s 0.1s forwards;
+  }
+  .hero-name {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: clamp(52px, 8vw, 100px);
+    line-height: 0.95;
+    letter-spacing: -3px;
+    color: var(--text);
+    opacity: 0;
+    animation: fadeUp 0.7s 0.25s forwards;
+  }
+  .hero-name span { color: var(--accent); }
+  .hero-sub {
+    font-size: 18px;
+    color: var(--text2);
+    margin-top: 28px;
+    max-width: 600px;
+    font-weight: 300;
+    opacity: 0;
+    animation: fadeUp 0.7s 0.4s forwards;
+  }
+  .hero-cta {
+    display: flex; gap: 16px; margin-top: 48px; flex-wrap: wrap;
+    opacity: 0;
+    animation: fadeUp 0.7s 0.55s forwards;
+  }
+  .btn-primary {
+    background: var(--accent);
+    color: #0a0f0d;
+    padding: 14px 32px;
+    border-radius: 4px;
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 14px;
+    text-decoration: none;
+    letter-spacing: 0.5px;
+    transition: background 0.2s, transform 0.15s;
+    display: inline-block;
+  }
+  .btn-primary:hover { background: #00ff88; transform: translateY(-2px); }
+  .btn-outline {
+    border: 1px solid var(--dim);
+    color: var(--text2);
+    padding: 14px 32px;
+    border-radius: 4px;
+    font-family: 'Syne', sans-serif;
+    font-weight: 500;
+    font-size: 14px;
+    text-decoration: none;
+    letter-spacing: 0.5px;
+    transition: border-color 0.2s, color 0.2s, transform 0.15s;
+    display: inline-block;
+  }
+  .btn-outline:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-2px); }
+
+  .hero-stats {
+    display: flex; gap: 48px; margin-top: 80px;
+    border-top: 1px solid var(--border);
+    padding-top: 40px;
+    opacity: 0;
+    animation: fadeUp 0.7s 0.7s forwards;
+    flex-wrap: wrap;
+  }
+  .stat-num {
+    font-family: 'Syne', sans-serif;
+    font-size: 36px;
+    font-weight: 800;
+    color: var(--accent);
+    line-height: 1;
+  }
+  .stat-label { font-size: 13px; color: var(--muted); margin-top: 4px; }
+
+  /* SECTION HEADINGS */
+  .section-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px;
+    color: var(--accent);
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+  .section-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 42px;
+    font-weight: 800;
+    letter-spacing: -1.5px;
+    line-height: 1.1;
+    margin-bottom: 48px;
+  }
+
+  /* SKILLS */
+  #skills { background: var(--bg2); max-width: 100%; padding: 100px 60px; }
+  #skills .inner { max-width: 1100px; margin: 0 auto; }
+  .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; }
+  .skill-card {
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 24px;
+    transition: border-color 0.2s, transform 0.2s;
+    cursor: default;
+  }
+  .skill-card:hover { border-color: var(--accent); transform: translateY(-4px); }
+  .skill-icon { font-size: 28px; margin-bottom: 12px; }
+  .skill-name {
+    font-family: 'Syne', sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 4px;
+  }
+  .skill-level {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    color: var(--accent);
+  }
+  .skill-bar-wrap { background: var(--border); border-radius: 2px; height: 3px; margin-top: 12px; }
+  .skill-bar { background: var(--accent); height: 3px; border-radius: 2px; transition: width 1s ease; }
+
+  /* EXPERIENCE */
+  .exp-list { display: flex; flex-direction: column; gap: 2px; }
+  .exp-item {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 32px;
+    transition: border-color 0.2s;
+    position: relative;
+    overflow: hidden;
+  }
+  .exp-item::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 3px;
+    background: var(--border);
+    transition: background 0.2s;
+  }
+  .exp-item:hover::before { background: var(--accent); }
+  .exp-item:hover { border-color: var(--dim); }
+  .exp-header { display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 12px; }
+  .exp-role { font-family: 'Syne', sans-serif; font-size: 20px; font-weight: 700; }
+  .exp-company { font-size: 14px; color: var(--accent); margin-top: 2px; }
+  .exp-date {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px;
+    color: var(--muted);
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 4px 12px;
+    white-space: nowrap;
+  }
+  .exp-desc { margin-top: 16px; color: var(--text2); font-size: 14px; line-height: 1.75; }
+  .exp-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
+  .exp-tag {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    color: var(--muted);
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 3px 10px;
+  }
+
+  /* CERTS */
+  .certs-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+  .cert-card {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 28px;
+    transition: border-color 0.2s, transform 0.2s;
+  }
+  .cert-card:hover { border-color: var(--accent); transform: translateY(-3px); }
+  .cert-issuer { font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: var(--accent); letter-spacing: 1px; text-transform: uppercase; margin-bottom: 10px; }
+  .cert-name { font-family: 'Syne', sans-serif; font-size: 17px; font-weight: 700; line-height: 1.3; margin-bottom: 8px; }
+  .cert-date { font-size: 13px; color: var(--muted); }
+  .cert-id { font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: var(--dim); margin-top: 8px; word-break: break-all; }
+
+  /* CONTACT */
+  #contact { background: var(--bg2); max-width: 100%; padding: 100px 60px; }
+  #contact .inner { max-width: 1100px; margin: 0 auto; }
+  .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; }
+  .contact-link {
+    display: flex; align-items: center; gap: 16px;
+    padding: 20px 24px;
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    text-decoration: none;
+    margin-bottom: 12px;
+    transition: border-color 0.2s;
+    color: var(--text);
+  }
+  .contact-link:hover { border-color: var(--accent); }
+  .contact-icon { font-size: 20px; width: 40px; text-align: center; }
+  .contact-label { font-size: 12px; color: var(--muted); font-family: 'IBM Plex Mono', monospace; }
+  .contact-value { font-size: 14px; color: var(--text); margin-top: 2px; }
+
+  /* FOOTER */
+  footer {
+    text-align: center;
+    padding: 40px 60px;
+    border-top: 1px solid var(--border);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px;
+    color: var(--muted);
+  }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.7s, transform 0.7s; }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  /* RESPONSIVE */
+  @media (max-width: 768px) {
+    nav { padding: 16px 24px; }
+    .nav-links { display: none; }
+    #hero { padding: 120px 24px 80px; }
+    section { padding: 80px 24px; }
+    #skills, #contact { padding: 80px 24px; }
+    .hero-name { letter-spacing: -2px; }
+    .contact-grid { grid-template-columns: 1fr; gap: 40px; }
+    .section-title { font-size: 32px; }
+    .hero-stats { gap: 32px; }
+  }
+
+  /* Scrollbar */
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-track { background: var(--bg); }
+  ::-webkit-scrollbar-thumb { background: var(--dim); border-radius: 3px; }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">MH.</div>
+  <div class="nav-links">
+    <a href="#about">About</a>
+    <a href="#skills">Skills</a>
+    <a href="#experience">Experience</a>
+    <a href="#certifications">Certs</a>
+    <a href="#contact">Contact</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div id="hero">
+  <div class="hero-inner">
+    <p class="hero-tag">// Data Analyst · Rawalpindi, Pakistan</p>
+    <h1 class="hero-name">Mubashir<br/><span>Hassan.</span></h1>
+    <p class="hero-sub">I turn messy data into clean dashboards, actionable reports, and decisions that actually make sense. Power BI · SQL · Looker Studio · Excel · Python.</p>
+    <div class="hero-cta">
+      <a href="#contact" class="btn-primary">Get in Touch</a>
+      <a href="#experience" class="btn-outline">View Experience</a>
+    </div>
+    <div class="hero-stats">
+      <div>
+        <div class="stat-num">3+</div>
+        <div class="stat-label">Years of Experience</div>
+      </div>
+      <div>
+        <div class="stat-num">4+</div>
+        <div class="stat-label">Certifications</div>
+      </div>
+      <div>
+        <div class="stat-num">10+</div>
+        <div class="stat-label">Tools & Technologies</div>
+      </div>
+      <div>
+        <div class="stat-num">4</div>
+        <div class="stat-label">Languages Spoken</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SKILLS -->
+<div id="skills">
+  <div class="inner">
+    <p class="section-label reveal">// 02. toolkit</p>
+    <h2 class="section-title reveal">Skills &<br/>Technologies</h2>
+    <div class="skills-grid">
+      <div class="skill-card reveal">
+        <div class="skill-icon">📊</div>
+        <div class="skill-name">Power BI</div>
+        <div class="skill-level">Advanced</div>
+        <div class="skill-bar-wrap"><div class="skill-bar" style="width:85%"></div></div>
+      </div>
+      <div class="skill-card reveal">
+        <div class="skill-icon">🔍</div>
+        <div class="skill-name">Looker Studio</div>
+        <div class="skill-level">Advanced</div>
+        <div class="skill-bar-wrap"><div class="skill-bar" style="width:82%"></div></div>
+      </div>
+      <div class="skill-card reveal">
+        <div class="skill-icon">📋</div>
+        <div class="skill-name">SQL</div>
+        <div class="skill-level">Intermediate</div>
+        <div class="skill-bar-wrap"><div class="skill-bar" style="width:75%"></div></div>
+      </div>
+      <div class="skill-card reveal">
+        <div class="skill-icon">📈</div>
+        <div class="skill-name">Excel / Sheets</div>
+        <div class="skill-level">Advanced</div>
+        <div class="skill-bar-wrap"><div class="skill-bar" style="width:90%"></div></div>
+      </div>
+      <div class="skill-card reveal">
+        <div class="skill-icon">🐍</div>
+        <div class="skill-name">Python</div>
+        <div class="skill-level">Beginner–Intermediate</div>
+        <div class="skill-bar-wrap"><div class="skill-bar" style="width:45%"></div></div>
+      </div>
+      <div class="skill-card reveal">
+        <div class="skill-icon">📉</div>
+        <div class="skill-name">Tableau</div>
+        <div class="skill-level">Intermediate</div>
+        <div class="skill-bar-wrap"><div class="skill-bar" style="width:65%"></div></div>
+      </div>
+      <div class="skill-card reveal">
+        <div class="skill-icon">📡</div>
+        <div class="skill-name">GA4 / Analytics</div>
+        <div class="skill-level">Intermediate</div>
+        <div class="skill-bar-wrap"><div class="skill-bar" style="width:65%"></div></div>
+      </div>
+      <div class="skill-card reveal">
+        <div class="skill-icon">🌐</div>
+        <div class="skill-name">HTML / CSS / PHP</div>
+        <div class="skill-level">Intermediate</div>
+        <div class="skill-bar-wrap"><div class="skill-bar" style="width:60%"></div></div>
+      </div>
+      <div class="skill-card reveal">
+        <div class="skill-icon">📦</div>
+        <div class="skill-name">Inventory / Lira ERP</div>
+        <div class="skill-level">Advanced</div>
+        <div class="skill-bar-wrap"><div class="skill-bar" style="width:88%"></div></div>
+      </div>
+      <div class="skill-card reveal">
+        <div class="skill-icon">📐</div>
+        <div class="skill-name">R Programming</div>
+        <div class="skill-level">Basic</div>
+        <div class="skill-bar-wrap"><div class="skill-bar" style="width:40%"></div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <p class="section-label reveal">// 03. experience</p>
+  <h2 class="section-title reveal">Work<br/>History</h2>
+  <div class="exp-list">
+    <div class="exp-item reveal">
+      <div class="exp-header">
+        <div>
+          <div class="exp-role">Associate Inventory Manager</div>
+          <div class="exp-company">Maven Projects (October Holdings)</div>
+        </div>
+        <span class="exp-date">Aug 2022 — Present</span>
+      </div>
+      <p class="exp-desc">
+        Managing end-to-end inventory data and operational reporting for an e-commerce operation. Built Excel-based sales dashboards and automated recurring reports. Coordinated logistics data with TCS, SWYFt, and FedEx, managing CN creation and shipment tracking. Used Lira ERP for inventory control and contributed to process efficiency improvements through data-driven workflows.
+      </p>
+      <div class="exp-tags">
+        <span class="exp-tag">Excel</span>
+        <span class="exp-tag">Lira ERP</span>
+        <span class="exp-tag">Data Reporting</span>
+        <span class="exp-tag">Logistics</span>
+        <span class="exp-tag">Dashboard Design</span>
+      </div>
+    </div>
+    <div class="exp-item reveal">
+      <div class="exp-header">
+        <div>
+          <div class="exp-role">Customer Service Representative</div>
+          <div class="exp-company">Jazz</div>
+        </div>
+        <span class="exp-date">Apr 2022 — Jul 2022</span>
+      </div>
+      <p class="exp-desc">
+        Managed customer accounts and billing records. Handled data-driven troubleshooting, maintained CRM data accuracy, and supported team reporting. Developed strong communication skills in translating data issues to non-technical stakeholders.
+      </p>
+      <div class="exp-tags">
+        <span class="exp-tag">CRM Data</span>
+        <span class="exp-tag">Billing Records</span>
+        <span class="exp-tag">Reporting</span>
+      </div>
+    </div>
+    <div class="exp-item reveal">
+      <div class="exp-header">
+        <div>
+          <div class="exp-role">Hub Assistant</div>
+          <div class="exp-company">Daraz</div>
+        </div>
+        <span class="exp-date">Sep 2021 — Dec 2021</span>
+      </div>
+      <p class="exp-desc">
+        Managed inbound and outbound inventory data at a major e-commerce hub. Generated daily stock movement reports and supported warehouse operations through precise data entry and reconciliation.
+      </p>
+      <div class="exp-tags">
+        <span class="exp-tag">Inventory Data</span>
+        <span class="exp-tag">Excel Reports</span>
+        <span class="exp-tag">E-commerce</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CERTIFICATIONS -->
+<section id="certifications" style="background:var(--bg2);max-width:100%;padding:100px 60px;">
+  <div style="max-width:1100px;margin:0 auto;">
+    <p class="section-label reveal">// 04. certifications</p>
+    <h2 class="section-title reveal">Credentials &<br/>Certifications</h2>
+    <div class="certs-grid">
+      <div class="cert-card reveal">
+        <div class="cert-issuer">Google / Coursera</div>
+        <div class="cert-name">Google Data Analytics Professional Certificate</div>
+        <div class="cert-date">July 2023 · 8 Courses</div>
+        <div class="cert-id">ID: 7WBPK263WYEP</div>
+        <div style="margin-top:16px;">
+          <a href="https://coursera.org/verify/professional-cert/7WBPK263WYEP" target="_blank" style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--accent);text-decoration:none;">Verify Certificate →</a>
+        </div>
+      </div>
+      <div class="cert-card reveal">
+        <div class="cert-issuer">Virtual University / Ignite</div>
+        <div class="cert-name">Digital Literacy — DigiSkills Training Program</div>
+        <div class="cert-date">March 2026 · DSTP3.0-Batch-02</div>
+        <div class="cert-id">ID: WT6BX4UMK</div>
+        <div style="margin-top:16px;">
+          <a href="https://digiskills.pk/verify" target="_blank" style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--accent);text-decoration:none;">Verify Certificate →</a>
+        </div>
+      </div>
+      <div class="cert-card reveal">
+        <div class="cert-issuer">Great Learning Academy</div>
+        <div class="cert-name">ChatGPT for Excel</div>
+        <div class="cert-date">September 2023</div>
+      </div>
+      <div class="cert-card reveal">
+        <div class="cert-issuer">Bootcamp</div>
+        <div class="cert-name">Data Analytics Bootcamp</div>
+        <div class="cert-date">Certificate of Completion</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EDUCATION -->
+<section id="about">
+  <p class="section-label reveal">// 05. education</p>
+  <h2 class="section-title reveal">Education</h2>
+  <div class="exp-item reveal">
+    <div class="exp-header">
+      <div>
+        <div class="exp-role">BS Electrical Engineering</div>
+        <div class="exp-company">Federal Urdu University of Arts, Science &amp; Technology (FUUAST)</div>
+      </div>
+      <span class="exp-date">2015 — 2019 · Islamabad</span>
+    </div>
+    <p class="exp-desc">
+      Graduated with a strong foundation in electronics, programming, and systems design. Final year project: a Hexa Copter drone equipped with explosive and metal detection sensors, including motion and heat sensing capabilities.
+    </p>
+    <div class="exp-tags">
+      <span class="exp-tag">Electrical Engineering</span>
+      <span class="exp-tag">Electronics</span>
+      <span class="exp-tag">Programming Fundamentals</span>
+      <span class="exp-tag">Sensor Systems</span>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<div id="contact">
+  <div class="inner">
+    <p class="section-label reveal">// 06. contact</p>
+    <h2 class="section-title reveal">Let's<br/>Work Together.</h2>
+    <div class="contact-grid">
+      <div>
+        <p style="color:var(--text2);font-size:15px;line-height:1.8;margin-bottom:32px;">
+          I'm open to Data Analyst, BI Analyst, and Reporting roles — both in Pakistan and remote. If you have a project or opportunity, I'd love to hear about it.
+        </p>
+        <a href="mailto:mubashirbaltistani1@gmail.com" class="contact-link">
+          <span class="contact-icon">✉</span>
+          <div>
+            <div class="contact-label">Email</div>
+            <div class="contact-value">mubashirbaltistani1@gmail.com</div>
+          </div>
+        </a>
+        <a href="tel:+923145525749" class="contact-link">
+          <span class="contact-icon">📞</span>
+          <div>
+            <div class="contact-label">Phone / WhatsApp</div>
+            <div class="contact-value">+92 314 5525749</div>
+          </div>
+        </a>
+        <a href="https://linkedin.com/in/mubashir-hassan-noori" target="_blank" class="contact-link">
+          <span class="contact-icon">in</span>
+          <div>
+            <div class="contact-label">LinkedIn</div>
+            <div class="contact-value">linkedin.com/in/mubashir-hassan-noori</div>
+          </div>
+        </a>
+        <a href="https://github.com/mubashirnoori" target="_blank" class="contact-link" id="github-link">
+          <span class="contact-icon">⌥</span>
+          <div>
+            <div class="contact-label">GitHub</div>
+            <div class="contact-value">github.com/mubashirnoori</div>
+          </div>
+        </a>
+      </div>
+      <div style="display:flex;flex-direction:column;justify-content:center;">
+        <div style="background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:32px;">
+          <p style="font-family:'Syne',sans-serif;font-weight:700;font-size:18px;margin-bottom:16px;">Currently available for</p>
+          <div style="display:flex;flex-direction:column;gap:12px;">
+            <div style="display:flex;align-items:center;gap:12px;">
+              <span style="color:var(--accent);font-size:18px;">✓</span>
+              <span style="color:var(--text2);font-size:14px;">Full-time Data Analyst roles</span>
+            </div>
+            <div style="display:flex;align-items:center;gap:12px;">
+              <span style="color:var(--accent);font-size:18px;">✓</span>
+              <span style="color:var(--text2);font-size:14px;">BI & Dashboard freelance projects</span>
+            </div>
+            <div style="display:flex;align-items:center;gap:12px;">
+              <span style="color:var(--accent);font-size:18px;">✓</span>
+              <span style="color:var(--text2);font-size:14px;">Remote / hybrid opportunities</span>
+            </div>
+            <div style="display:flex;align-items:center;gap:12px;">
+              <span style="color:var(--accent);font-size:18px;">✓</span>
+              <span style="color:var(--text2);font-size:14px;">Data reporting & Excel automation</span>
+            </div>
+          </div>
+          <div style="margin-top:28px;padding-top:24px;border-top:1px solid var(--border);">
+            <p style="font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--muted);margin-bottom:8px;">Languages spoken</p>
+            <p style="font-size:14px;color:var(--text2);">Urdu · English · Balti · Shina</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <p>Built & designed by Mubashir Hassan · 2025 · Rawalpindi, Pakistan</p>
+</footer>
+
+<script>
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) {
+        setTimeout(() => e.target.classList.add('visible'), i * 60);
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  reveals.forEach(r => observer.observe(r));
+</script>
+</body>
+</html>
